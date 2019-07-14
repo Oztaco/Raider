@@ -146,56 +146,54 @@ class Board {
     enum class PieceType {
         KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN, EMPTY;
 
-        fun moves(): Array<Array<IntRange>> {
+        fun moves(): Array<Pair<IntRange, IntRange>> {
             return when (this) {
                 KING -> arrayOf(
-                    arrayOf( 1.. 1,  0.. 0), // Straight
-                    arrayOf( 0.. 0,  1.. 1),
-                    arrayOf(-1..-1,  0.. 0),
-                    arrayOf( 0.. 0, -1..-1),
-                    arrayOf( 1.. 1,  1.. 1), // Diagonal
-                    arrayOf(-1..-1, -1..-1),
-                    arrayOf( 1.. 1, -1..-1),
-                    arrayOf(-1..-1,  1.. 1)
+                    Pair( 1.. 1,  0.. 0), // Straight
+                    Pair( 0.. 0,  1.. 1),
+                    Pair(-1..-1,  0.. 0),
+                    Pair( 0.. 0, -1..-1),
+                    Pair( 1.. 1,  1.. 1), // Diagonal
+                    Pair(-1..-1, -1..-1),
+                    Pair( 1.. 1, -1..-1),
+                    Pair(-1..-1,  1.. 1)
                 )
                 QUEEN -> arrayOf(
-                    arrayOf( 1.. 7,  0.. 0), // X
-                    arrayOf(-1..-7,  0.. 0),
-                    arrayOf( 0.. 0,  1.. 7), // Y
-                    arrayOf( 0.. 0, -1..-7),
-                    arrayOf( 1.. 7,  1.. 7), // Downward right
-                    arrayOf(-1..-7, -1..-7), // Upward left
-                    arrayOf( 1.. 7, -1..-7), // Upward right
-                    arrayOf(-1..-7,  1.. 7)  // Downward left
+                    Pair( 1.. 7,  0.. 0), // X
+                    Pair(-1..-7,  0.. 0),
+                    Pair( 0.. 0,  1.. 7), // Y
+                    Pair( 0.. 0, -1..-7),
+                    Pair( 1.. 7,  1.. 7), // Downward right
+                    Pair(-1..-7, -1..-7), // Upward left
+                    Pair( 1.. 7, -1..-7), // Upward right
+                    Pair(-1..-7,  1.. 7)  // Downward left
                 )
                 ROOK -> arrayOf(
-                    arrayOf( 1.. 7,  0.. 0), // X
-                    arrayOf(-1..-7,  0.. 0),
-                    arrayOf( 0.. 0,  1.. 7), // Y
-                    arrayOf( 0.. 0, -1..-7)
+                    Pair( 1.. 7,  0.. 0), // X
+                    Pair(-1..-7,  0.. 0),
+                    Pair( 0.. 0,  1.. 7), // Y
+                    Pair( 0.. 0, -1..-7)
                 )
                 BISHOP -> arrayOf(
-                    arrayOf( 1.. 7,  1.. 7), // Downward right
-                    arrayOf(-1..-7, -1..-7), // Upward left
-                    arrayOf( 1.. 7, -1..-7), // Upward right
-                    arrayOf(-1..-7,  1.. 7)  // Downward left
+                    Pair( 1.. 7,  1.. 7), // Downward right
+                    Pair(-1..-7, -1..-7), // Upward left
+                    Pair( 1.. 7, -1..-7), // Upward right
+                    Pair(-1..-7,  1.. 7)  // Downward left
                 )
                 KNIGHT -> arrayOf(
-                    arrayOf( 1.. 1,  -2.. -2), // Top right
-                    arrayOf( 2.. 2,  -1.. -1),
-                    arrayOf( 1.. 1,   2..  2), // Bottom right
-                    arrayOf( 2.. 2,   1..  1),
-                    arrayOf(-1..-1,   2..  2), // Bottom left
-                    arrayOf(-2..-2,   1..  1),
-                    arrayOf(-1..-1,  -2.. -2), // Top left
-                    arrayOf(-2..-2,  -1.. -1)
+                    Pair( 1.. 1,  -2.. -2), // Top right
+                    Pair( 2.. 2,  -1.. -1),
+                    Pair( 1.. 1,   2..  2), // Bottom right
+                    Pair( 2.. 2,   1..  1),
+                    Pair(-1..-1,   2..  2), // Bottom left
+                    Pair(-2..-2,   1..  1),
+                    Pair(-1..-1,  -2.. -2), // Top left
+                    Pair(-2..-2,  -1.. -1)
                 )
                 PAWN -> arrayOf(
-                    arrayOf( 0.. 0,   2..  2)
+                    Pair( 0.. 0,   2..  2)
                 )
-                else -> Array<Array<IntRange>>(0, {
-                    Array<IntRange>(0, {0..0})
-                })
+                else -> arrayOf<Pair<IntRange, IntRange>>()
             }
         }
     }
