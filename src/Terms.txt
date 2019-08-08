@@ -1,0 +1,21 @@
+Move Pattern - The way that a chess piece can possibly move.
+        Knights move in L's, etc. The legality of the move and
+        the bounds of the board are not considered. Every
+        possible space a piece /could/ move to is here.
+Move
+
+
+Things that determine if a move is legal:
+        1. The move pattern of that piece
+        2. KING: Is castling allowed right now?
+        3. PAWN: Is it the pawn's first move?
+        4. PAWN: Is en passant allowed right now?
+        5. Would the move put the king in check? (costly)
+
+How to check if King is in check:
+        
+
+En Passant
+        Only happens the very next turn after a pawn moves
+        forward two spaces. Requires access to previous state
+        of the board

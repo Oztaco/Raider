@@ -95,6 +95,16 @@ class Board {
     }
 
 
+    fun getPieceMovePattern() {
+
+    }
+
+
+    fun isKingInCheck() {
+
+    }
+
+
     enum class Piece {
         KING_WHITE, QUEEN_WHITE, ROOK_WHITE, BISHOP_WHITE, KNIGHT_WHITE, PAWN_WHITE,
         KING_BLACK, QUEEN_BLACK, ROOK_BLACK, BISHOP_BLACK, KNIGHT_BLACK, PAWN_BLACK,
@@ -141,12 +151,26 @@ class Board {
                 EMPTY        -> " . "
             }
         }
+
+        fun movePatterns() {
+            var pieceType = this.type();
+            var pieceColor = this.color();
+            var movePatterns = pieceType.movePatterns();
+            // For the black player, invert the possible moves
+            // in the Y direction
+            if (pieceColor == PieceColor.BLACK) {
+                for (i in 0 until movePatterns.size) {
+                    var pattern = movePatterns[i];
+                    movePatterns[i] = pattern.copy(second = pattern.second * -1)
+                }
+            }
+        }
     }
 
     enum class PieceType {
         KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN, EMPTY;
 
-        fun moves(): Array<Pair<IntRange, IntRange>> {
+        fun movePatterns(): Array<Pair<IntRange, IntRange>> {
             return when (this) {
                 KING -> arrayOf(
                     Pair( 1.. 1,  0.. 0), // Straight
@@ -191,11 +215,14 @@ class Board {
                     Pair(-2..-2,  -1.. -1)
                 )
                 PAWN -> arrayOf(
-                    Pair( 0.. 0,   2..  2)
+                    Pair( 0.. 0,   2..  2), // Forward
+                    Pair(-1..-1,   1..  1), // En passant
+                    Pair( 1.. 1,   1..  1)
                 )
                 else -> arrayOf<Pair<IntRange, IntRange>>()
             }
         }
+
     }
 
     enum class PieceColor {
